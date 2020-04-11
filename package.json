@@ -1,0 +1,12 @@
+{
+  "name": "carcel.dev",
+  "version": "1.0.0",
+  "description": "My personal web page",
+  "main": "index.js",
+  "repository": "git@github.com:damien-carcel/carcel.dev",
+  "author": "Damien Carcel <damien.carcel@gmail.com>",
+  "license": "MIT",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
+}
