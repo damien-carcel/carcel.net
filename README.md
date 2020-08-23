@@ -1,34 +1,19 @@
-# main
+# carcel.dev
 
-## Project setup
-```
-yarn install
-```
+[![Damien Carcel](https://circleci.com/gh/damien-carcel/carcel.dev.svg?style=svg)](https://github.com/damien-carcel/carcel.dev.git)
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## Requirements
 
-### Compiles and minifies for production
-```
-yarn build
-```
+- Node >= 12
+- Yarn
+- Make
 
-### Run your unit tests
-```
-yarn test:unit
+## How to use it?
+
+```bash
+$ make
 ```
 
-### Run your end-to-end tests
-```
-yarn test:e2e
-```
+## License
 
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+This repository is under the MIT license. See the complete license in the [LICENSE](LICENSE) file.
