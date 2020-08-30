@@ -3,7 +3,7 @@ version: 2.1
 jobs:
     tests:
         docker:
-            - image: cypress/browsers:node12.18.0-chrome83-ff77
+            - image: cimg/node:current
         steps:
             - checkout
             - run:
@@ -11,7 +11,7 @@ jobs:
                 command: |
                     touch ~/.yarnrc
                     mkdir ~/.yarn
-                    mkdir -p ~/.cache/yarn ~/.cache/Cypress
+                    mkdir -p ~/.cache/yarn
             - restore_cache:
                 keys:
                     - yarn-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
@@ -24,31 +24,8 @@ jobs:
                 paths:
                     - ~/.cache/yarn
             - run:
-                name: Create report directory
-                command: mkdir tests/reports
-            - run:
                 name: Lint CSS/LESS code
                 command: make stylelint
-            - run:
-                name: Lint JavaScript/TypeScript code
-                command: make eslint IO=--no-fix
-            - run:
-                name: Run TS type checking
-                command: make type-check
-            - run:
-                name: Run unit tests
-                command: make unit IO="--ci --reporters=default --reporters=jest-junit"
-            - run:
-                name: Run End to End tests
-                command: make end-to-end IO="--headless --reporter mocha-junit-reporter"
-            - store_test_results:
-                path: tests/reports
-            - store_artifacts:
-                path: tests/reports
-            - store_artifacts:
-                path: tests/e2e/screenshots
-            - store_artifacts:
-                path: tests/e2e/videos
 
 workflows:
     version: 2
