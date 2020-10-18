@@ -35,7 +35,7 @@ upgrade: ## Upgrades project dependencies to their latest version (works only if
 # Serve and build-prod
 
 .PHONY: serve
-serve: node_modules #main# Run the application using http-party/http-server (hit CTRL+c to stop the server)
+serve: node_modules #main# Run the application using webpack-dev-server (hit CTRL+c to stop the server)
 	@yarn serve
 
 .PHONY: build

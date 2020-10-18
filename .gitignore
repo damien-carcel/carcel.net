@@ -1,7 +1,5 @@
+/dist
 /node_modules
-/public
-!/public/favicon.ico
-!/public/index.html
 
 npm-debug.log*
 yarn-debug.log*

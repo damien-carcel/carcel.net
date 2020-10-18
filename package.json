@@ -2,16 +2,26 @@
   "name": "carcel.dev",
   "private": true,
   "scripts": {
-    "build": "tailwindcss build src/style.css -o public/style.css",
-    "serve": "http-server -o",
-    "stylelint": "stylelint 'src/**/*.{css,less}' 'public/**/*.html'"
+    "build": "webpack --progress --mode production",
+    "serve": "webpack serve --progress --mode development",
+    "stylelint": "stylelint 'src/**/*.{css,html}'"
   },
   "dependencies": {
     "tailwindcss": "^1.9.4"
   },
   "devDependencies": {
-    "http-server": "^0.12.3",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^5.0.0",
+    "css-minimizer-webpack-plugin": "^1.1.5",
+    "html-webpack-plugin": "^5.0.0-alpha.6",
+    "mini-css-extract-plugin": "^1.0.0",
+    "postcss": "^8.1.1",
+    "postcss-loader": "^4.0.4",
+    "style-loader": "^2.0.0",
     "stylelint": "^13.7.2",
-    "stylelint-config-standard": "^20.0.0"
+    "stylelint-config-standard": "^20.0.0",
+    "webpack": "^5.1.3",
+    "webpack-cli": "^4.0.0",
+    "webpack-dev-server": "^3.11.0"
   }
 }
