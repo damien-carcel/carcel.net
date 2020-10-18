@@ -2,10 +2,13 @@
   "name": "carcel.dev",
   "private": true,
   "scripts": {
+    "build": "tailwindcss build src/style.css -o public/style.css",
     "serve": "http-server -o",
-    "stylelint": "stylelint 'public/**/*.{css,less,html}'"
+    "stylelint": "stylelint 'src/**/*.{css,less}' 'public/**/*.html'"
   },
-  "dependencies": {},
+  "dependencies": {
+    "tailwindcss": "^1.9.4"
+  },
   "devDependencies": {
     "http-server": "^0.12.3",
     "stylelint": "^13.7.2",

@@ -35,8 +35,12 @@ upgrade: ## Upgrades project dependencies to their latest version (works only if
 # Serve and build-prod
 
 .PHONY: serve
-serve: node_modules #main# Run the application using Vue CLI development server (hit CTRL+c to stop the server)
+serve: node_modules #main# Run the application using http-party/http-server (hit CTRL+c to stop the server)
 	@yarn serve
+
+.PHONY: build
+build: node_modules #main# Build the production artifacts
+	@yarn build
 
 # Tests
 
