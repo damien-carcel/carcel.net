@@ -1,10 +1,7 @@
 # carcel.dev
 
-[![Damien Carcel](https://circleci.com/gh/damien-carcel/carcel.dev.svg?style=svg)](https://github.com/damien-carcel/carcel.dev.git)
-
 ## Requirements
 
-- Node >= 12
 - Yarn
 - Make
 
