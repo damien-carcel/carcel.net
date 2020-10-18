@@ -13,16 +13,16 @@ module.exports = {
     watchContentBase: true,
   },
   entry: {
-    'style': './src/style.css',
+    'style': './src/style.less',
   },
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.less$/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
-          'postcss-loader',
+          'less-loader',
         ],
       },
     ],
