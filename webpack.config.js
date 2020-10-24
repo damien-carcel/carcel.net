@@ -13,16 +13,17 @@ module.exports = {
     watchContentBase: true,
   },
   entry: {
-    'style': './src/style.less',
+    'style': './src/style.css',
   },
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.css$/,
+        exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
-          'less-loader',
+          'postcss-loader',
         ],
       },
     ],
@@ -33,7 +34,9 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['**/*'],
+    }),
     new HtmlWebpackPlugin({
       title: "Hello, I'm Damien.",
       favicon: 'assets/favicon.ico'
