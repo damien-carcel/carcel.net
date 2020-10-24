@@ -1,38 +1,42 @@
 version: 2.1
 
 jobs:
-    tests:
-        docker:
-            - image: cimg/node:current
-        steps:
-            - checkout
-            - run:
-                name: Create cache and configuration directories for the client dependencies
-                command: |
-                    touch ~/.yarnrc
-                    mkdir ~/.yarn
-                    mkdir -p ~/.cache/yarn
-            - restore_cache:
-                keys:
-                    - yarn-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
-                    - yarn-{{ .Environment.CACHE_VERSION }}-
-            - run:
-                name: Install dependencies
-                command: make install
-            - save_cache:
-                key: yarn-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
-                paths:
-                    - ~/.cache/yarn
-            - run:
-                name: Lint CSS/LESS code
-                command: make stylelint
+  tests:
+    docker:
+      - image: cimg/node:current
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
+    steps:
+      - checkout
+      - run:
+          name: Create cache and configuration directories for the client dependencies
+          command: |
+            touch ~/.yarnrc
+            mkdir ~/.yarn
+            mkdir -p ~/.cache/yarn
+      - restore_cache:
+          keys:
+            - yarn-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+            - yarn-{{ .Environment.CACHE_VERSION }}-
+      - run:
+          name: Install dependencies
+          command: make install
+      - save_cache:
+          key: yarn-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: Lint CSS/LESS code
+          command: make stylelint
 
 workflows:
-    version: 2
-    pull_request:
-        jobs:
-            - tests:
-                filters:
-                    branches:
-                        ignore:
-                            - master
+  pull_request:
+    jobs:
+      - tests:
+          context:
+            - docker-hub-credentials
+          filters:
+            branches:
+              ignore:
+                - master
