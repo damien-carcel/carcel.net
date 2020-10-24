@@ -39,8 +39,17 @@ serve: node_modules #main# Run the application using webpack-dev-server (hit CTR
 	@yarn serve
 
 .PHONY: build
-build: node_modules #main# Build the production artifacts
+build: node_modules ## Build the production artifacts
 	@yarn build
+
+.PHONY: up
+up: build #main# Serve the application in production-like mode through Docker
+	@docker-compose up -d
+	@xdg-open http://carcel.docker.localhost
+
+.PHONY: down
+down: #main# Stop and remove the Docker containers
+	@docker-compose down -v
 
 # Tests
 
