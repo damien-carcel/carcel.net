@@ -1,4 +1,4 @@
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -38,8 +38,8 @@ module.exports = {
       cleanOnceBeforeBuildPatterns: ['**/*'],
     }),
     new HtmlWebpackPlugin({
-      title: "Hello, I'm Damien.",
-      favicon: 'assets/favicon.ico'
+      template: __dirname + '/src/index.html',
+      favicon: 'assets/favicon.ico',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',

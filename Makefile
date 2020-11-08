@@ -18,14 +18,14 @@ help:
 
 # Application dependencies
 
-yarn.lock: package.json
-	@yarn install
-
-node_modules: yarn.lock
-	@yarn install --frozen-lockfile --check-files
-
 .PHONY: install
-install: node_modules ## Install project dependencies
+install: ## Install project dependencies
+ifeq ($(wildcard yarn.lock),)
+	@echo "Install the Node modules according to package.json"
+	@yarn install
+endif
+	@echo "Install the Node modules according to yarn.lock"
+	@yarn install --frozen-lockfile --check-files
 
 .PHONY: upgrade
 upgrade: ## Upgrades project dependencies to their latest version (works only if project dependencies were installed at least once)
@@ -35,15 +35,19 @@ upgrade: ## Upgrades project dependencies to their latest version (works only if
 # Serve and build-prod
 
 .PHONY: serve
-serve: node_modules #main# Run the application using webpack-dev-server (hit CTRL+c to stop the server)
+serve: #main# Run the application using webpack-dev-server (hit CTRL+c to stop the server)
 	@yarn serve
 
 .PHONY: build
-build: node_modules ## Build the production artifacts
+build: ## Build the production artifacts
 	@yarn build
 
+.PHONY: pull
+pull: ## Pull all Docker images used in docker-compose.yaml
+	@docker-compose pull
+
 .PHONY: up
-up: build #main# Serve the application in production-like mode through Docker
+up: pull build #main# Serve the application in production-like mode through Docker
 	@docker-compose up -d
 	@xdg-open http://carcel.docker.localhost
 
@@ -54,7 +58,7 @@ down: #main# Stop and remove the Docker containers
 # Tests
 
 .PHONY: tests
-tests: node_modules #main# Execute all the tests
+tests: install #main# Execute all the tests
 	@echo ""
 	@echo "|----------------------|"
 	@echo "| Lint the stylesheets |"
