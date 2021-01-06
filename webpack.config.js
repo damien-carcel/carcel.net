@@ -1,4 +1,4 @@
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -13,16 +13,17 @@ module.exports = {
     watchContentBase: true,
   },
   entry: {
-    'style': './src/style.less',
+    'style': './src/style.css',
   },
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.css$/,
+        exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
-          'less-loader',
+          'postcss-loader',
         ],
       },
     ],
@@ -33,10 +34,12 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['**/*'],
+    }),
     new HtmlWebpackPlugin({
-      title: "Hello, I'm Damien.",
-      favicon: 'assets/favicon.ico'
+      template: __dirname + '/src/index.html',
+      favicon: 'assets/favicon.ico',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
